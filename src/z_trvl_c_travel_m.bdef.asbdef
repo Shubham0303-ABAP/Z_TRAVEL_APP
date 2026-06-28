@@ -1,0 +1,63 @@
+projection;
+strict ( 2 );
+
+use side effects;
+
+define behavior for Z_TRVL_C_TRAVEL_M alias travel
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action copy_travel;
+  use association _booking { create; }
+}
+
+define behavior for Z_TRVL_C_BOOKING_M alias booking
+use etag
+{
+  use update;
+  use delete;
+
+  use association _travel;
+  use association _booksuppl { create; }
+}
+
+define behavior for z_trvl_C_booksuppl_m alias booksuppl
+use etag
+{
+  use update;
+  use delete;
+
+  use association _travel;
+  use association _booking;
+}
+
+
+//define behavior for Z_TRVL_C_TRAVEL_M alias travel
+//{
+//  use create;
+//  use update;
+//  use delete;
+//
+//  use association _booking { create; }
+//}
+//
+//define behavior for Z_TRVL_C_BOOKING_M alias booking
+//{
+//  use update;
+//  use delete;
+//
+//  use association _travel;
+//  use association _booksuppl { create; }
+//}
+//
+//define behavior for z_trvl_C_booksuppl_m alias booksuppl
+//{
+//  use update;
+//  use delete;
+//
+//  use association _travel;
+//  use association _booking;
+//}

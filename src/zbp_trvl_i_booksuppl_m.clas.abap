@@ -1,0 +1,5 @@
+CLASS zbp_trvl_i_booksuppl_m DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF z_trvl_i_travel_m.
+ENDCLASS.
+
+CLASS zbp_trvl_i_booksuppl_m IMPLEMENTATION.
+ENDCLASS.

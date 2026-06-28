@@ -1,0 +1,121 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI:{ headerInfo: {
+                    typeName: 'Travel',
+                    typeNamePlural: 'Travels',
+                    title: {value: 'TravelId' },
+                    description: { value: 'Name' },
+                    title.label: 'Travel ID'
+                  }
+    }
+annotate entity Z_TRVL_C_TRAVEL_M with
+{
+
+  @UI.facet: [
+              { purpose: #HEADER,
+                type: #DATAPOINT_REFERENCE ,
+                targetQualifier: 'Price',
+                label: 'Total Price',
+                position: 10 },
+              { purpose: #HEADER,
+                type: #DATAPOINT_REFERENCE ,
+                targetQualifier: 'Status',
+                label: 'Booking Status',
+                position: 20 },  
+              { purpose: #STANDARD,
+                type: #COLLECTION ,
+                position: 10 ,
+                id: 'collection',
+                label: 'Travel Details'},
+              { purpose: #STANDARD,
+               type: #IDENTIFICATION_REFERENCE,
+               parentId: 'collection',
+               position: 10},
+              { purpose: #STANDARD,
+               type: #FIELDGROUP_REFERENCE,
+               parentId: 'collection',
+               targetQualifier: 'creation_fg',
+               label: 'Creation Details',
+               position: 20},
+               
+//             Bookings  
+             { position: 20 ,
+               label: 'Booking',
+               type: #LINEITEM_REFERENCE ,
+               targetElement: '_booking' }  
+             ]
+
+  @Search.defaultSearchElement: true
+  @UI:{ selectionField: [{ position: 10 }] , 
+        lineItem: [{ position: 10 } , 
+                   { type: #FOR_ACTION , 
+                     label: 'Copy Travel',
+                     dataAction: 'copy_travel'
+                   }] , 
+        identification: [{ position : 10 } , 
+                         { type: #FOR_ACTION , 
+                           label: 'Copy Travel',
+                           dataAction: 'copy_travel'
+                         }]}
+  TravelId;
+
+  @UI:{ selectionField: [{ position: 20 }] }
+  @Consumption.valueHelpDefinition: [{ entity.name: '/DMO/I_Agency' , entity.element: 'Name' }]
+  Name;
+
+  @EndUserText.label: 'Customer Name'
+  @UI:{ selectionField: [{ position: 30 }] }
+  @Consumption.valueHelpDefinition: [{ entity.name: '/DMO/I_Customer' , entity.element: 'FirstName' }]
+  FirstName;
+
+  @Search.defaultSearchElement: true
+  @UI:{ lineItem: [{ position: 20 }], identification: [{ position : 20 }] }
+  @Consumption.valueHelpDefinition: [{ entity.name: '/DMO/I_Agency' , entity.element: 'AgencyID' }]
+  AgencyId;
+
+  @UI:{ lineItem: [{ position: 30 }] , identification: [{ position : 30 }] }
+  @Consumption.valueHelpDefinition: [{ entity.name: '/DMO/I_Customer' , entity.element: 'CustomerID' }]
+  CustomerId;
+
+  @UI:{ lineItem: [{ position: 40 }] , identification: [{ position : 40 }] }
+  BeginDate;
+  
+  @UI:{ identification: [{ position : 50 }] }
+  EndDate;
+  
+  @UI:{ identification: [{ position : 60 }] }
+  BookingFee;
+
+  @UI:{ lineItem: [{ position: 50 }] , identification: [{ position : 70 }],
+        dataPoint: { qualifier: 'Price' } }
+  TotalPrice;
+  
+  @UI:{ identification: [{ position : 80 }] }
+  @Consumption.valueHelpDefinition: [{ entity.name: 'I_Currency' , entity.element: 'Currency' }]
+  CurrencyCode;
+
+  @UI:{ lineItem: [{ position: 60 }] , identification: [{ position : 90 }]}
+  Description;
+
+  @UI:{ selectionField: [{ position: 40 }] , lineItem: [{ position: 70 }] ,
+        identification: [{ position : 100 }], dataPoint: { qualifier: 'Status' } }
+  @Consumption.valueHelpDefinition: [ { entity.name: '/DMO/I_Overall_Status_VH', entity.element: 'OverallStatus' } ]      
+  OverallStatus;
+
+  @UI:{ lineItem: [{ position: 80 }] , fieldGroup: [{ qualifier: 'creation_fg' , position: 10 }]}
+  CreatedBy;
+
+  @UI:{ fieldGroup: [{ qualifier: 'creation_fg' , position: 20 }]}
+  CreatedAt;
+
+  @UI:{ fieldGroup: [{ qualifier: 'creation_fg' , position: 30 }] }  
+  LastChangedBy;
+  @UI:{ fieldGroup: [{ qualifier: 'creation_fg' , position: 40 }] } 
+  LastChangedAt;
+  /* Associations */
+  //    _agency;
+  //    _booking;
+  //    _customer;
+  //    _overallStatus;
+
+}

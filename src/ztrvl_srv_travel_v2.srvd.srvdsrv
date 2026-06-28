@@ -1,0 +1,6 @@
+@EndUserText.label: 'Travel App service v2'
+define service ZTRVL_SRV_TRAVEL_V2 {
+  expose Z_TRVL_C_TRAVEL_M;
+  expose Z_TRVL_C_BOOKING_M;
+  expose z_trvl_C_booksuppl_m;
+}

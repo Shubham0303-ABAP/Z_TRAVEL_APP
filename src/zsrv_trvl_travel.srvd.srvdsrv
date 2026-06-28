@@ -1,0 +1,6 @@
+@EndUserText.label: 'Travel App service'
+define service ZSRV_TRVL_TRAVEL {
+  expose Z_TRVL_C_TRAVEL_M;
+  expose Z_TRVL_C_BOOKING_M;
+  expose z_trvl_C_booksuppl_m;
+}
